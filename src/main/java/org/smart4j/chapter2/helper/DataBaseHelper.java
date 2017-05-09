@@ -61,20 +61,6 @@ public final class DataBaseHelper {
         return connection;
     }
 
-
-    private  static void colseConnection(){
-        Connection connection = CONNECTION_HOLDER.get();
-        if(connection != null){
-            try {
-                connection.close();
-            }catch (SQLException e){
-                LOGGER.error("close connection failure",e);
-            }finally {
-                CONNECTION_HOLDER.remove();//移除线程中的connection
-            }
-        }
-    }
-
     /**
      *  查询实体列表
      */
@@ -86,8 +72,6 @@ public final class DataBaseHelper {
             } catch (SQLException e) {
                 LOGGER.error("query entity list failure",e);
                 throw new RuntimeException(e);
-            }finally {
-                colseConnection();
             }
         return entityList;
     }
@@ -103,8 +87,6 @@ public final class DataBaseHelper {
         } catch (SQLException e) {
             LOGGER.error("query entity failure",e);
             throw new RuntimeException(e);
-        }finally {
-            colseConnection();
         }
         return entity;
     }
@@ -120,8 +102,6 @@ public final class DataBaseHelper {
         }catch (Exception e){
             LOGGER.error("execute query failure",e);
             throw new RuntimeException(e);
-        }finally {
-            colseConnection();
         }
         return  result;
     }
@@ -137,8 +117,6 @@ public final class DataBaseHelper {
         }catch (Exception e){
             LOGGER.error("execute query failure",e);
             throw new RuntimeException(e);
-        }finally {
-            colseConnection();
         }
         return  rows;
     }

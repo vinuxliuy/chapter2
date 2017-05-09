@@ -25,7 +25,7 @@ public class CustomerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String sql = "SELECT name FROM customer";
+        String sql = "SELECT * FROM customer";
         List<Customer> customerList = customerService.getCustomerList(sql);
         req.setAttribute("customerList",customerList);
         req.getRequestDispatcher("WEB-INF/view/customer.jsp").forward(req,resp);
